@@ -447,7 +447,7 @@
 <li>las fuentes de datos son el modelo (M)</li>
 </ul>
 <p><strong>La interfaz de usuario</strong> suele ser un navegador web, pero también podría ser una aplicación autónoma que, a través de la red, enviaría solicitudes HTTP al servicio web y daría formato a los resultados que este le envía. La <strong>lógica de la aplicación</strong> está formada por los scripts que procesan las solicitudes del usuario. La <strong>fuente de datos</strong> suele ser una base de datos, pero también pueden ser simples archivos planos, un directorio LDAP, un servicio web remoto, etc. Al desarrollador le conviene mantener una gran independencia entre estas tres entidades para que, si una de ellas cambia, las otras dos no tengan que cambiar, o lo hagan mínimamente.</p>
-<p>La arquitectura MVC se adapta bien a aplicaciones web escritas con lenguajes orientados a objetos. El lenguaje PHP (4.x) no está orientado a objetos. No obstante, se puede hacer un esfuerzo por estructurar el código y la arquitectura de la aplicación para acercarnos al modelo MVC:</p>
+<p>La arquitectura MVC se adapta bien a aplicaciones web escritas con lenguajes orientados a objetos. El lenguaje PHP (4.x) no está orientado a objetos. No obstante, se puede hacer un esfuerzo por estructurar el código y la arquitectura de la aplicación para acercarse al modelo MVC:</p>
 <ul>
 <li>Se colocará la lógica de negocio de la aplicación en módulos separados de los módulos encargados de controlar el diálogo solicitud-respuesta. La arquitectura MVC queda así:</li>
 </ul>
@@ -457,8 +457,8 @@
 <ul>
 <li>el programa principal o controlador, que es la puerta de entrada a la aplicación.</li>
 <li>el bloque [Actions], conjunto de scripts encargados de ejecutar las acciones solicitadas por el usuario.</li>
-<li>el bloque [Classes métier], que agrupa los módulos php necesarios para la lógica de la aplicación. Son independientes del cliente. Por ejemplo, la función que permite calcular un impuesto a partir de cierta información que se le proporciona en parámetros no tiene que preocuparse por la forma en que se han obtenido estos.</li>
-<li>el bloque [Classes d&#x27;accès aux données], que agrupa los módulos php que obtienen los datos necesarios para el controlador, a menudo datos persistentes (BD, archivos, etc.)</li>
+<li>el bloque [Classes métier], que agrupa los módulos PHP necesarios para la lógica de la aplicación. Son independientes del cliente. Por ejemplo, la función que permite calcular un impuesto a partir de cierta información que se le proporciona en los parámetros no tiene que preocuparse por cómo se han obtenido estos.</li>
+<li>El bloque [Classes d&#x27;accès aux données], que agrupa los módulos PHP que obtienen los datos necesarios para el controlador, a menudo datos persistentes (BD, archivos, etc.).</li>
 <li>los generadores de las vistas enviadas como respuesta al cliente. </li>
 </ul>
 <p>En los casos más sencillos, la lógica de la aplicación suele reducirse a dos módulos:</p>

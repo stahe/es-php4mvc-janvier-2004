@@ -435,7 +435,7 @@
 
 <p><span id="refheading29948107341754" name="refheading29948107341754" class="odt-bookmark-anchor"></span></p>
 <h1 id="2-un-enfoque-de-desarrollo-mvc-en-webphp">2. <span style="color: #365f91">Un enfoque de desarrollo MVC en web/PHP</span></h1>
-<p>Proponemos aquí un enfoque para el desarrollo de aplicaciones web/php que respete la arquitectura MVC. Su único objetivo es abrir nuevas vías. El lector lo adaptará a sus gustos y necesidades.</p>
+<p>Proponemos aquí un enfoque para el desarrollo de aplicaciones web/PHP que respeten la arquitectura MVC. Su único objetivo es abrir nuevas vías. El lector lo adaptará a sus gustos y necesidades.</p>
 <ol>
 <li>Comenzaremos por definir todas las vistas de la aplicación. Estas son las páginas web que se muestran al usuario. Nos pondremos en su lugar para diseñar las vistas. Se distinguen tres tipos de vistas:<ul>
 <li>el <strong>formulario de entrada</strong>, cuyo objetivo es obtener información del usuario. Este suele disponer de un botón para enviar al servidor la información introducida.</li>
@@ -562,7 +562,7 @@
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="x">&lt;balise&gt;</span>
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="x">...</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="x">                // aquí se intentará minimizar el código php</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="x">                // aquí se intentará minimizar el código PHP</span>
 <a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="x">&lt;/balise&gt;</span>
 </code></pre></div>
 <p>Cabe señalar que una vista elemental se integra en un modelo. Su código HTML se integra dentro del código de este último. En la mayoría de los casos, este último ya incluye las etiquetas &lt;html&gt;, &lt;head&gt; y &lt;body&gt;. Por lo tanto, es poco frecuente encontrar estas etiquetas en una vista elemental.</p>
@@ -572,7 +572,7 @@
 </ol>
 
 <ul>
-  <li>Se prueba cada modelo de respuesta. Si un modelo se llama <b>modele1.php</b>, se solicitará con un navegador el URL <b>http://localhost/ruta/modele1.php. </b>La plantilla espera valores del controlador. Aquí se llama directamente y no a través del controlador. La plantilla no recibirá los parámetros esperados. Para que las pruebas sean posibles de todos modos, se inicializarán manualmente, con constantes, los parámetros esperados en la página PHP de la plantilla.
+  <li>Se prueba cada modelo de respuesta. Si un modelo se llama <b>modele1.php</b>, se solicitará con un navegador el URL<b> http://localhost/chemin/modele1.php </b>El modelo espera valores del controlador. Aquí se llama directamente y no a través del controlador. El modelo no recibirá los parámetros esperados. Para que las pruebas sean posibles de todos modos, se inicializarán manualmente, con constantes, los parámetros esperados en la página PHP del modelo.
   </li>
   <li>Se prueban todos los modelos, así como todas las vistas elementales. También es el momento de elaborar los primeros elementos de las hojas de estilo utilizadas.
   </li>
@@ -607,14 +607,14 @@
 
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a> <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/C/main.php?action=uneAction&quot;</span><span class="p">&gt;</span>lien<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
 </code></pre></div>
-<p>El controlador puede comenzar leyendo el valor de este parámetro y, a continuación, delegar el procesamiento de la solicitud a un módulo encargado de gestionar este tipo de solicitudes. Nos hemos situado aquí en el caso en el que todo estuviera controlado por un único script llamado <strong>main.php</strong>. Si la aplicación debe procesar las acciones <strong>action1</strong>, <strong>action2</strong>, ..., <strong>actionx</strong>, se puede crear dentro del controlador una función por acción. Si hay muchas acciones, se puede llegar a tener un controlador «dinosaurio». También se pueden crear scripts <strong>action1.php</strong>, <strong>action2.php</strong>, ..., <strong>actionx.php</strong> encargados de gestionar cada una de las acciones. El controlador que deba procesar la acción <strong>actionx</strong> se limitará a cargar el código del script correspondiente mediante una instrucción del tipo <strong>include «actionx.php</strong>». La ventaja de este método es que se trabaja fuera del código del controlador. De este modo, cada miembro del equipo de desarrollo puede trabajar en el script de procesamiento de una acción <strong>actionx</strong> de forma relativamente independiente. La inclusión del código del script <strong>actionx.php</strong> en el código del controlador en el momento de la ejecución tiene también la ventaja de aligerar el código cargado en memoria. Solo se carga el código de procesamiento de la acción en curso. Esta inclusión de código hace que las variables del controlador puedan entrar en conflicto con las del script de la acción. Veremos que podemos hacer lo posible por limitar las variables del controlador a unas pocas variables bien definidas, que luego habrá que evitar utilizar en los scripts.</p>
+<p>El controlador puede empezar por leer el valor de este parámetro y luego delegar el procesamiento de la solicitud a un módulo encargado de gestionar este tipo de solicitudes. En este caso, hemos supuesto que todo se controla mediante un único script llamado <strong>main.php</strong>. Si la aplicación debe gestionar acciones <strong>action1</strong>, <strong>action2</strong>, ..., <strong>actionx,</strong> se puede crear dentro del controlador una función por acción. Si hay muchas acciones, se puede llegar a tener un controlador «dinosaurio». También se pueden crear scripts <strong>action1.php</strong>, <strong>action2.php</strong>, ...,<strong>actionx.php</strong> encargados de procesar cada una de las acciones. El controlador que deba procesar la acción <strong>actionx</strong> se limitará a cargar el código del script correspondiente mediante una instrucción del tipo <strong>include «actionx.php</strong>». La ventaja de este método es que se trabaja fuera del código del controlador. De este modo, cada miembro del equipo de desarrollo puede trabajar en el script de procesamiento de una acción <strong>actionx</strong> de forma relativamente independiente. La inclusión del código del script <strong>actionx.php</strong> en el código del controlador en el momento de la ejecución tiene también la ventaja de aligerar el código cargado en memoria. Solo se carga el código de procesamiento de la acción en curso. Esta inclusión de código hace que las variables del controlador puedan entrar en conflicto con las del script de la acción. Veremos que podemos hacer lo necesario para limitar las variables del controlador a unas pocas variables bien definidas, que entonces habrá que evitar utilizar en los scripts.</p>
 <ul>
-  <li>Se buscará sistemáticamente aislar el código de negocio o el código de acceso a los datos persistentes en módulos separados. El controlador es una especie de jefe de equipo que recibe solicitudes de sus clients (clients web) y las hace ejecutar por las personas más adecuadas (los módulos de negocio). Al escribir el controlador, se determinará la interfaz de los módulos de negocio que hay que escribir. Esto si dichos módulos de negocio están por construir. Si ya existen, entonces el controlador  se adaptará a la interfaz de dichos módulos existentes.
+  <li>Se buscará sistemáticamente aislar el código de negocio o el código de acceso a los datos persistentes en módulos separados. El controlador es una especie de jefe de equipo que recibe solicitudes de sus clientes (clientes web) y las hace ejecutar por las personas más adecuadas (los módulos de negocio). Al escribir el controlador, se determinará la interfaz de los módulos de negocio que hay que escribir. Esto si dichos módulos de negocio están por construir. Si ya existen, entonces el controlador  se adaptará a la interfaz de dichos módulos existentes.
   </li>
 </ul>
 
 <ol start="4">
-  <li>Se escribirá el esqueleto de los módulos de negocio necesarios para el controlador. Por ejemplo, si este utiliza un módulo <b>getCodes </b>que devuelve una matriz de cadenas de caracteres, basta con escribir, en un primer momento:
+  <li>Se escribirá el esqueleto de los módulos de negocio necesarios para el controlador. Por ejemplo, si este utiliza un módulo <b>getCodes </b>que devuelve una tabla de cadenas de caracteres, en un primer momento bastará con escribir:
   </li>
 </ol>
 
@@ -630,7 +630,7 @@
 <ul>
   <li>el controlador, los scripts de acciones, los modelos, las vistas y los recursos necesarios para la aplicación (imágenes, etc.) se colocan en la carpeta <b>DC </b>asociada al contexto <b>C </b>de la aplicación. 
   </li>
-  <li>Una vez hecho esto, se prueba la aplicación y se corrigen los primeros errores. Si <b>main.php </b>es el controlador y <b>C </b>el contexto de la aplicación, se solicitará el URL <b>http://localhost/C/main.php</b>. Al final de esta fase, la arquitectura de la aplicación está operativa. Esta fase de prueba puede resultar delicada, ya que se dispone de pocas herramientas de depuración si no se utilizan entornos de desarrollo avanzados y, por lo general, de pago. Podemos ayudarnos de instrucciones <b>echo «mensaje» </b>que escriben en el flujo HTML enviado al cliente y que, por lo tanto, aparecen en la página web mostrada por el navegador.
+  <li>Una vez hecho esto, se prueba la aplicación y se corrigen los primeros errores. Si <b>main.php </b>es el controlador y <b>C </b>el contexto de la aplicación, se solicitará el URL<b> http://localhost/C/main.php</b>. Al final de esta fase, la arquitectura de la aplicación está operativa. Esta fase de prueba puede resultar complicada, ya que se dispone de pocas herramientas de depuración si no se utilizan entornos de desarrollo avanzados y, por lo general, de pago. Podemos ayudarnos de instrucciones <b>echo «mensaje» </b>que escriben en el flujo HTML enviado al cliente y que, por lo tanto, aparecen en la página web mostrada por el navegador.
   </li>
 </ul>
 
