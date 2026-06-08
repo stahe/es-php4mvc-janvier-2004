@@ -435,36 +435,50 @@
 
 <p><span id="refheading29946107341754" name="refheading29946107341754" class="odt-bookmark-anchor"></span></p>
 <h1 id="1-utilizar-la-arquitectura-mvc-en-aplicaciones-webphp">1. <span style="color: #365f91">Utilizar la arquitectura MVC en aplicaciones web/php</span></h1>
-<p>El PDF del documento está disponible |ICI|.</p>
-<p>Los códigos del documento están disponibles |ICI|.</p>
+<p>El PDF del documento está disponible |<a href="https://1drv.ms/b/c/f53a919f43d27eb5/IQAL23Vix-JlSaMK6MeOgWbxAXZlijrI2iziM9ch3Iircm8?e=KgrVT5">AQUÍ</a>|.</p>
+<p>Los códigos del documento están disponibles |<a href="https://1drv.ms/u/c/f53a919f43d27eb5/IQDgz1c4n6lMQ4WX_YSZCzLsAYqKTSV5K2jUvNmleRC5GWo?e=gGrGQv">AQUÍ</a>|.</p>
 <p>El modelo MVC (Modelo-Vista-Controlador) busca separar claramente las capas de presentación, procesamiento y acceso a los datos. Una aplicación web que respete este modelo tendrá la siguiente arquitectura:</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><img src="images/1000000000000400000000BB4D654A99.png" width="512" height="94" style="display:inline-block; margin:4px;width:13.547cm;height:2.475cm;" class="odt-zoomable" data-zoom-src="images/1000000000000400000000BB4D654A99.png" /></td></tr></table>
 
 <p>Esta arquitectura se denomina a menudo arquitectura de tres capas o de tres niveles:</p>
 <ul>
-<li>la interfaz de usuario es la vista (V)</li>
-<li>la lógica de la aplicación es el controlador (C)</li>
-<li>las fuentes de datos son el modelo (M)</li>
+  <li>la interfaz de usuario es la vista (V)
+  </li>
+  <li>la lógica de la aplicación es el controlador (C)
+  </li>
+  <li>las fuentes de datos son el modelo (M)
+  </li>
 </ul>
+
 <p><strong>La interfaz de usuario</strong> suele ser un navegador web, pero también podría ser una aplicación autónoma que, a través de la red, enviaría solicitudes HTTP al servicio web y daría formato a los resultados que este le envía. La <strong>lógica de la aplicación</strong> está formada por los scripts que procesan las solicitudes del usuario. La <strong>fuente de datos</strong> suele ser una base de datos, pero también pueden ser simples archivos planos, un directorio LDAP, un servicio web remoto, etc. Al desarrollador le conviene mantener una gran independencia entre estas tres entidades para que, si una de ellas cambia, las otras dos no tengan que cambiar, o lo hagan mínimamente.</p>
 <p>La arquitectura MVC se adapta bien a aplicaciones web escritas con lenguajes orientados a objetos. El lenguaje PHP (4.x) no está orientado a objetos. No obstante, se puede hacer un esfuerzo por estructurar el código y la arquitectura de la aplicación para acercarse al modelo MVC:</p>
 <ul>
-<li>Se colocará la lógica de negocio de la aplicación en módulos separados de los módulos encargados de controlar el diálogo solicitud-respuesta. La arquitectura MVC queda así:</li>
+  <li>Se colocará la lógica de negocio de la aplicación en módulos separados de los módulos encargados de controlar el diálogo solicitud-respuesta. La arquitectura MVC queda así:
+  </li>
 </ul>
+
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><img src="images/100000000000061F000001BFD28D9CBA.png" width="680" height="194" style="display:inline-block; margin:4px;width:17.999cm;height:5.135cm;" class="odt-zoomable" data-zoom-src="images/100000000000061F000001BFD28D9CBA.png" /></td></tr></table>
 
 <p>En el bloque [Logique Applicative], se pueden distinguir:</p>
 <ul>
-<li>el programa principal o controlador, que es la puerta de entrada a la aplicación.</li>
-<li>el bloque [Actions], conjunto de scripts encargados de ejecutar las acciones solicitadas por el usuario.</li>
-<li>el bloque [Classes métier], que agrupa los módulos PHP necesarios para la lógica de la aplicación. Son independientes del cliente. Por ejemplo, la función que permite calcular un impuesto a partir de cierta información que se le proporciona en los parámetros no tiene que preocuparse por cómo se han obtenido estos.</li>
-<li>El bloque [Classes d&#x27;accès aux données], que agrupa los módulos PHP que obtienen los datos necesarios para el controlador, a menudo datos persistentes (BD, archivos, etc.).</li>
-<li>los generadores de las vistas enviadas como respuesta al cliente. </li>
+  <li>el programa principal o controlador, que es la puerta de entrada a la aplicación.
+  </li>
+  <li>el bloque [Actions], conjunto de scripts encargados de ejecutar las acciones solicitadas por el usuario.
+  </li>
+  <li>el bloque [Classes métier], que agrupa los módulos PHP necesarios para la lógica de la aplicación. Son independientes del cliente. Por ejemplo, la función que permite calcular un impuesto a partir de cierta información que se le proporciona en los parámetros no tiene que preocuparse por cómo se han obtenido estos.
+  </li>
+  <li>El bloque [Classes d&#x27;accès aux données], que agrupa los módulos PHP que obtienen los datos necesarios para el controlador, a menudo datos persistentes (BD, archivos, etc.).
+  </li>
+  <li>los generadores de las vistas enviadas como respuesta al cliente. 
+  </li>
 </ul>
+
 <p>En los casos más sencillos, la lógica de la aplicación suele reducirse a dos módulos:</p>
 <ul>
-<li>el módulo [contrôle], que se encarga del diálogo cliente-servidor: procesamiento de la solicitud, generación de las distintas respuestas</li>
-<li>el módulo [métier], que recibe del módulo [contrôle] los datos que debe procesar y le proporciona a su vez los resultados. Este módulo [métier] gestiona entonces por sí mismo el acceso a los datos persistentes.</li>
+  <li>el módulo [contrôle], que se encarga del diálogo cliente-servidor: procesamiento de la solicitud, generación de las distintas respuestas
+  </li>
+  <li>el módulo [métier], que recibe del módulo [contrôle] los datos que debe procesar y le proporciona a su vez los resultados. Este módulo [métier] gestiona entonces por sí mismo el acceso a los datos persistentes.
+  </li>
 </ul>
 
 

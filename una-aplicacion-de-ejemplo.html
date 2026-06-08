@@ -967,11 +967,11 @@
 <p>La clase de acceso a datos está diseñada para ocultar a la aplicación web el origen de los datos. En su interfaz, encontramos un método <strong>getData</strong> que  proporciona las tres tablas de datos necesarias para el cálculo del impuesto. En nuestro ejemplo, los datos se extraen de una base de datos MySQL. Para que la clase sea independiente del tipo real de SGBD, utilizaremos la biblioteca <strong>pear::DB</strong> descrita en el anexo. El código de la clase es el siguiente:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">&lt;?php</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="c1">// bibliotecas</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>   <span class="c1">// bibliotecas</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  <span class="k">require_once</span> <span class="s1">&#39;DB.php&#39;</span><span class="p">;</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  <span class="k">class</span> <span class="nc">impots_data</span><span class="p">{</span>  
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        <span class="c1">// clase de acceso a la fuente de datos DBIMPOTS</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>     <span class="c1">// clase de acceso a la fuente de datos DBIMPOTS</span>
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>      <span class="c1">// attributs</span>
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>        <span class="k">var</span> <span class="nv">$sDSN</span><span class="p">;</span>         <span class="c1">// la cadena de conexión</span>
@@ -985,92 +985,92 @@
 <a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    <span class="c1">// constructeur</span>
 <a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>    <span class="k">function</span> <span class="nf">impots_data</span><span class="p">(</span><span class="nv">$dDSN</span><span class="p">){</span>
 <a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>
-<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>                <span class="c1">// $dDSN: diccionario que define la conexión que se va a establecer</span>
-<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>            <span class="c1">// $dDSN[&#39;sgbd&#39;]: el tipo de SGBD al que hay que conectarse</span>
-<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>            <span class="c1">// $dDSN[&#39;host&#39;]: el nombre del servidor que lo aloja           </span>
-<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>            <span class="c1">// $dDSN[&#39;database&#39;]: el nombre de la base de datos a la que hay que conectarse           </span>
-<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>            <span class="c1">// $dDSN[&#39;user&#39;]: un usuario de la base</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>         <span class="c1">// $dDSN: diccionario que define la conexión que se va a establecer</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>       <span class="c1">// $dDSN[&#39;sgbd&#39;]: el tipo de SGBD al que hay que conectarse</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>       <span class="c1">// $dDSN[&#39;host&#39;]: el nombre del servidor que lo aloja      </span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>       <span class="c1">// $dDSN[&#39;database&#39;]: el nombre de la base de datos a la que hay que conectarse      </span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>       <span class="c1">// $dDSN[&#39;user&#39;]: un usuario de la base</span>
 <a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>      <span class="c1">// $dDSN[&#39;mdp&#39;] : son mot de passe</span>
 <a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>
-<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>            <span class="c1">// crea en $oDB una conexión a la base de datos definida por $dDSN con la identidad de $dDSN[&#39;user&#39;]</span>
-<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>            <span class="c1">// si la conexión se realiza correctamente   </span>
-<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>                    <span class="c1">// introduce en $sDSN la cadena de conexión a la base de datos</span>
-<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>                    <span class="c1">// introduce en $sDataBase el nombre de la base de datos a la que se conecta</span>
-<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>                <span class="c1">// establece $connecté como verdadero</span>
-<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>            <span class="c1">// si la conexión falla</span>
-<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>                    <span class="c1">// añade los mensajes de error correspondientes a la lista $aErreurs</span>
-<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>                <span class="c1">// cierra la conexión si es necesario</span>
-<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>                <span class="c1">// establece $connecté en falso </span>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>       <span class="c1">// crea en $oDB una conexión a la base de datos definida por $dDSN con la identidad de $dDSN[&#39;user&#39;]</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>       <span class="c1">// si la conexión se realiza correctamente  </span>
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>           <span class="c1">// introduce en $sDSN la cadena de conexión a la base de datos</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>           <span class="c1">// introduce en $sDataBase el nombre de la base de datos a la que se conecta</span>
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>         <span class="c1">// establece $connecté como verdadero</span>
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>       <span class="c1">// si la conexión falla</span>
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>           <span class="c1">// añade los mensajes de error correspondientes a la lista $aErreurs</span>
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>         <span class="c1">// cierra la conexión si es necesario</span>
+<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>         <span class="c1">// establece $connecté en falso </span>
 <a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>
-<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>            <span class="c1">// borra la lista de errores</span>
+<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>       <span class="c1">// borra la lista de errores</span>
 <a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">aErreurs</span><span class="o">=</span><span class="k">array</span><span class="p">();</span>
 <a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>
-<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>            <span class="c1">// se crea una conexión a la base de datos $sDSN</span>
+<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>       <span class="c1">// se crea una conexión a la base de datos $sDSN</span>
 <a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>      <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">sDSN</span><span class="o">=</span><span class="nv">$dDSN</span><span class="p">[</span><span class="s2">&quot;sgbd&quot;</span><span class="p">]</span><span class="o">.</span><span class="s2">&quot;://&quot;</span><span class="o">.</span><span class="nv">$dDSN</span><span class="p">[</span><span class="s2">&quot;user&quot;</span><span class="p">]</span><span class="o">.</span><span class="s2">&quot;:&quot;</span><span class="o">.</span><span class="nv">$dDSN</span><span class="p">[</span><span class="s2">&quot;mdp&quot;</span><span class="p">]</span><span class="o">.</span><span class="s2">&quot;@&quot;</span><span class="o">.</span><span class="nv">$dDSN</span><span class="p">[</span><span class="s2">&quot;host&quot;</span><span class="p">]</span><span class="o">.</span><span class="s2">&quot;/&quot;</span><span class="o">.</span><span class="nv">$dDSN</span><span class="p">[</span><span class="s2">&quot;database&quot;</span><span class="p">];</span>
 <a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>      <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">sDatabase</span><span class="o">=</span><span class="nv">$dDSN</span><span class="p">[</span><span class="s2">&quot;database&quot;</span><span class="p">];</span>
 <a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>      <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">connect</span><span class="p">();</span>
 <a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>
-<a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a>            <span class="c1">// ¿Conectado?</span>
+<a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a>       <span class="c1">// ¿Conectado?</span>
 <a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>      <span class="k">if</span><span class="p">(</span> <span class="o">!</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">connecté</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
 <a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a>
-<a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a>            <span class="c1">// la conexión se ha realizado correctamente         </span>
+<a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a>       <span class="c1">// la conexión se ha realizado correctamente     </span>
 <a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a>      <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">connecté</span><span class="o">=</span><span class="k">TRUE</span><span class="p">;</span>     
 <a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a>    <span class="p">}</span><span class="c1">//constructeur</span>
 <a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a>
 <a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a>    <span class="c1">// ------------------------------------------------------------------</span>
 <a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a>    <span class="k">function</span> <span class="nf">connect</span><span class="p">(){</span>
-<a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a>                <span class="c1">// (re)conexión a la base</span>
-<a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a>            <span class="c1">// borrar lista de errores</span>
+<a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a>         <span class="c1">// (re)conexión a la base</span>
+<a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a>       <span class="c1">// borrar lista de errores</span>
 <a id="__codelineno-0-57" name="__codelineno-0-57" href="#__codelineno-0-57"></a>            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">aErreurs</span><span class="o">=</span><span class="k">array</span><span class="p">();</span>
 <a id="__codelineno-0-58" name="__codelineno-0-58" href="#__codelineno-0-58"></a>
-<a id="__codelineno-0-59" name="__codelineno-0-59" href="#__codelineno-0-59"></a>            <span class="c1">// se está creando una conexión con la base de datos $sDSN</span>
+<a id="__codelineno-0-59" name="__codelineno-0-59" href="#__codelineno-0-59"></a>       <span class="c1">// se está creando una conexión con la base de datos $sDSN</span>
 <a id="__codelineno-0-60" name="__codelineno-0-60" href="#__codelineno-0-60"></a>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">oDB</span><span class="o">=</span><span class="nx">DB</span><span class="o">::</span><span class="na">connect</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">sDSN</span><span class="p">,</span><span class="k">true</span><span class="p">);</span>
 <a id="__codelineno-0-61" name="__codelineno-0-61" href="#__codelineno-0-61"></a>
-<a id="__codelineno-0-62" name="__codelineno-0-62" href="#__codelineno-0-62"></a>                <span class="c1">// ¿error?</span>
+<a id="__codelineno-0-62" name="__codelineno-0-62" href="#__codelineno-0-62"></a>         <span class="c1">// ¿error?</span>
 <a id="__codelineno-0-63" name="__codelineno-0-63" href="#__codelineno-0-63"></a>        <span class="k">if</span><span class="p">(</span><span class="nx">DB</span><span class="o">::</span><span class="na">iserror</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">oDB</span><span class="p">)){</span>
-<a id="__codelineno-0-64" name="__codelineno-0-64" href="#__codelineno-0-64"></a>                    <span class="c1">// se registra el error</span>
+<a id="__codelineno-0-64" name="__codelineno-0-64" href="#__codelineno-0-64"></a>           <span class="c1">// se registra el error</span>
 <a id="__codelineno-0-65" name="__codelineno-0-65" href="#__codelineno-0-65"></a>          <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">aErreurs</span><span class="p">[]</span><span class="o">=</span><span class="s2">&quot;Echec de la connexion à la base [&quot;</span><span class="o">.</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">sDatabase</span><span class="o">.</span><span class="s2">&quot;] : [&quot;</span><span class="o">.</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">oDB</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">()</span><span class="o">.</span><span class="s2">&quot;]&quot;</span><span class="p">;</span>
-<a id="__codelineno-0-66" name="__codelineno-0-66" href="#__codelineno-0-66"></a>                <span class="c1">// la conexión ha fallado</span>
+<a id="__codelineno-0-66" name="__codelineno-0-66" href="#__codelineno-0-66"></a>         <span class="c1">// la conexión ha fallado</span>
 <a id="__codelineno-0-67" name="__codelineno-0-67" href="#__codelineno-0-67"></a>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">connecté</span><span class="o">=</span><span class="k">FALSE</span><span class="p">;</span>
 <a id="__codelineno-0-68" name="__codelineno-0-68" href="#__codelineno-0-68"></a>        <span class="c1">// fin</span>
 <a id="__codelineno-0-69" name="__codelineno-0-69" href="#__codelineno-0-69"></a>        <span class="k">return</span><span class="p">;</span>
 <a id="__codelineno-0-70" name="__codelineno-0-70" href="#__codelineno-0-70"></a>      <span class="p">}</span>
 <a id="__codelineno-0-71" name="__codelineno-0-71" href="#__codelineno-0-71"></a>
-<a id="__codelineno-0-72" name="__codelineno-0-72" href="#__codelineno-0-72"></a>            <span class="c1">// estamos conectados</span>
+<a id="__codelineno-0-72" name="__codelineno-0-72" href="#__codelineno-0-72"></a>       <span class="c1">// estamos conectados</span>
 <a id="__codelineno-0-73" name="__codelineno-0-73" href="#__codelineno-0-73"></a>      <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">connecté</span><span class="o">=</span><span class="k">TRUE</span><span class="p">;</span>
 <a id="__codelineno-0-74" name="__codelineno-0-74" href="#__codelineno-0-74"></a>    <span class="p">}</span><span class="c1">//connect</span>
 <a id="__codelineno-0-75" name="__codelineno-0-75" href="#__codelineno-0-75"></a>
 <a id="__codelineno-0-76" name="__codelineno-0-76" href="#__codelineno-0-76"></a>    <span class="c1">// ------------------------------------------------------------------</span>
 <a id="__codelineno-0-77" name="__codelineno-0-77" href="#__codelineno-0-77"></a>    <span class="k">function</span> <span class="nf">disconnect</span><span class="p">(){</span>
-<a id="__codelineno-0-78" name="__codelineno-0-78" href="#__codelineno-0-78"></a>            <span class="c1">// si estamos conectados, cerramos la conexión a la base $sDSN</span>
+<a id="__codelineno-0-78" name="__codelineno-0-78" href="#__codelineno-0-78"></a>       <span class="c1">// si estamos conectados, cerramos la conexión a la base $sDSN</span>
 <a id="__codelineno-0-79" name="__codelineno-0-79" href="#__codelineno-0-79"></a>        <span class="k">if</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">connecté</span><span class="p">){</span>
 <a id="__codelineno-0-80" name="__codelineno-0-80" href="#__codelineno-0-80"></a>              <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">oDB</span><span class="o">-&gt;</span><span class="na">disconnect</span><span class="p">();</span>
-<a id="__codelineno-0-81" name="__codelineno-0-81" href="#__codelineno-0-81"></a>                    <span class="c1">// se ha desconectado</span>
+<a id="__codelineno-0-81" name="__codelineno-0-81" href="#__codelineno-0-81"></a>           <span class="c1">// se ha desconectado</span>
 <a id="__codelineno-0-82" name="__codelineno-0-82" href="#__codelineno-0-82"></a>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">connecté</span><span class="o">=</span><span class="k">FALSE</span><span class="p">;</span>
 <a id="__codelineno-0-83" name="__codelineno-0-83" href="#__codelineno-0-83"></a>            <span class="p">}</span><span class="c1">//if</span>
 <a id="__codelineno-0-84" name="__codelineno-0-84" href="#__codelineno-0-84"></a>    <span class="p">}</span><span class="c1">//disconnect</span>
 <a id="__codelineno-0-85" name="__codelineno-0-85" href="#__codelineno-0-85"></a>
 <a id="__codelineno-0-86" name="__codelineno-0-86" href="#__codelineno-0-86"></a>    <span class="c1">// -------------------------------------------------------------------</span>
 <a id="__codelineno-0-87" name="__codelineno-0-87" href="#__codelineno-0-87"></a>    <span class="k">function</span> <span class="nf">execute</span><span class="p">(</span><span class="nv">$sQuery</span><span class="p">){</span>
-<a id="__codelineno-0-88" name="__codelineno-0-88" href="#__codelineno-0-88"></a>                <span class="c1">// $sQuery: consulta para ejecutar</span>
+<a id="__codelineno-0-88" name="__codelineno-0-88" href="#__codelineno-0-88"></a>         <span class="c1">// $sQuery: consulta para ejecutar</span>
 <a id="__codelineno-0-89" name="__codelineno-0-89" href="#__codelineno-0-89"></a>
-<a id="__codelineno-0-90" name="__codelineno-0-90" href="#__codelineno-0-90"></a>                <span class="c1">// se almacena la solicitud</span>
+<a id="__codelineno-0-90" name="__codelineno-0-90" href="#__codelineno-0-90"></a>         <span class="c1">// se almacena la solicitud</span>
 <a id="__codelineno-0-91" name="__codelineno-0-91" href="#__codelineno-0-91"></a>            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">sQuery</span><span class="o">=</span><span class="nv">$sQuery</span><span class="p">;</span>    
 <a id="__codelineno-0-92" name="__codelineno-0-92" href="#__codelineno-0-92"></a>
-<a id="__codelineno-0-93" name="__codelineno-0-93" href="#__codelineno-0-93"></a>            <span class="c1">// ¿Estamos conectados?</span>
+<a id="__codelineno-0-93" name="__codelineno-0-93" href="#__codelineno-0-93"></a>       <span class="c1">// ¿Estamos conectados?</span>
 <a id="__codelineno-0-94" name="__codelineno-0-94" href="#__codelineno-0-94"></a>      <span class="k">if</span><span class="p">(</span><span class="o">!</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">connecté</span><span class="p">){</span>
-<a id="__codelineno-0-95" name="__codelineno-0-95" href="#__codelineno-0-95"></a>                    <span class="c1">// se registra el error</span>
+<a id="__codelineno-0-95" name="__codelineno-0-95" href="#__codelineno-0-95"></a>           <span class="c1">// se registra el error</span>
 <a id="__codelineno-0-96" name="__codelineno-0-96" href="#__codelineno-0-96"></a>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">aErreurs</span><span class="p">[]</span><span class="o">=</span><span class="s2">&quot;Pas de connexion existante à la base [</span><span class="si">$this-&gt;sDatabase</span><span class="s2">]&quot;</span><span class="p">;</span>
 <a id="__codelineno-0-97" name="__codelineno-0-97" href="#__codelineno-0-97"></a>        <span class="c1">// fin</span>
 <a id="__codelineno-0-98" name="__codelineno-0-98" href="#__codelineno-0-98"></a>        <span class="k">return</span><span class="p">;</span>
 <a id="__codelineno-0-99" name="__codelineno-0-99" href="#__codelineno-0-99"></a>      <span class="p">}</span><span class="c1">//if</span>
 <a id="__codelineno-0-100" name="__codelineno-0-100" href="#__codelineno-0-100"></a>
-<a id="__codelineno-0-101" name="__codelineno-0-101" href="#__codelineno-0-101"></a>            <span class="c1">// ejecución de la consulta</span>
+<a id="__codelineno-0-101" name="__codelineno-0-101" href="#__codelineno-0-101"></a>       <span class="c1">// ejecución de la consulta</span>
 <a id="__codelineno-0-102" name="__codelineno-0-102" href="#__codelineno-0-102"></a>      <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">oRésultats</span><span class="o">=</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">oDB</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="nv">$sQuery</span><span class="p">);</span>
 <a id="__codelineno-0-103" name="__codelineno-0-103" href="#__codelineno-0-103"></a>
-<a id="__codelineno-0-104" name="__codelineno-0-104" href="#__codelineno-0-104"></a>                <span class="c1">// ¿Error?</span>
+<a id="__codelineno-0-104" name="__codelineno-0-104" href="#__codelineno-0-104"></a>         <span class="c1">// ¿Error?</span>
 <a id="__codelineno-0-105" name="__codelineno-0-105" href="#__codelineno-0-105"></a>        <span class="k">if</span><span class="p">(</span><span class="nx">DB</span><span class="o">::</span><span class="na">iserror</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">oRésultats</span><span class="p">)){</span>
-<a id="__codelineno-0-106" name="__codelineno-0-106" href="#__codelineno-0-106"></a>                        <span class="c1">// se anota el error</span>
+<a id="__codelineno-0-106" name="__codelineno-0-106" href="#__codelineno-0-106"></a>             <span class="c1">// se anota el error</span>
 <a id="__codelineno-0-107" name="__codelineno-0-107" href="#__codelineno-0-107"></a>            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">aErreurs</span><span class="p">[]</span><span class="o">=</span><span class="s2">&quot;Echec de la requête [</span><span class="si">$sQuery</span><span class="s2">] : [&quot;</span><span class="o">.</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">oRésultats</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">()</span><span class="o">.</span><span class="s2">&quot;]&quot;</span><span class="p">;</span>
 <a id="__codelineno-0-108" name="__codelineno-0-108" href="#__codelineno-0-108"></a>          <span class="c1">// retour</span>
 <a id="__codelineno-0-109" name="__codelineno-0-109" href="#__codelineno-0-109"></a>        <span class="k">return</span><span class="p">;</span>
@@ -1079,11 +1079,11 @@
 <a id="__codelineno-0-112" name="__codelineno-0-112" href="#__codelineno-0-112"></a>
 <a id="__codelineno-0-113" name="__codelineno-0-113" href="#__codelineno-0-113"></a>    <span class="c1">// ------------------------------------------------------------------</span>
 <a id="__codelineno-0-114" name="__codelineno-0-114" href="#__codelineno-0-114"></a>    <span class="k">function</span> <span class="nf">getData</span><span class="p">(){</span>
-<a id="__codelineno-0-115" name="__codelineno-0-115" href="#__codelineno-0-115"></a>            <span class="c1">// se recuperan las 3 series de datos: limites, coeffr, coeffn</span>
+<a id="__codelineno-0-115" name="__codelineno-0-115" href="#__codelineno-0-115"></a>       <span class="c1">// se recuperan las 3 series de datos: limites, coeffr, coeffn</span>
 <a id="__codelineno-0-116" name="__codelineno-0-116" href="#__codelineno-0-116"></a>      <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">execute</span><span class="p">(</span><span class="s1">&#39;select limites, coeffR, coeffN from impots&#39;</span><span class="p">);</span>
-<a id="__codelineno-0-117" name="__codelineno-0-117" href="#__codelineno-0-117"></a>            <span class="c1">// ¿Hay errores?</span>
+<a id="__codelineno-0-117" name="__codelineno-0-117" href="#__codelineno-0-117"></a>       <span class="c1">// ¿Hay errores?</span>
 <a id="__codelineno-0-118" name="__codelineno-0-118" href="#__codelineno-0-118"></a>      <span class="k">if</span><span class="p">(</span><span class="nb">count</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">aErreurs</span><span class="p">)</span><span class="o">!=</span><span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="k">array</span><span class="p">();</span>
-<a id="__codelineno-0-119" name="__codelineno-0-119" href="#__codelineno-0-119"></a>            <span class="c1">// se recorre el resultado de la selección</span>
+<a id="__codelineno-0-119" name="__codelineno-0-119" href="#__codelineno-0-119"></a>       <span class="c1">// se recorre el resultado de la selección</span>
 <a id="__codelineno-0-120" name="__codelineno-0-120" href="#__codelineno-0-120"></a>      <span class="k">while</span> <span class="p">(</span><span class="nv">$ligne</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">oRésultats</span><span class="o">-&gt;</span><span class="na">fetchRow</span><span class="p">(</span><span class="nx">DB_FETCHMODE_ASSOC</span><span class="p">))</span> <span class="p">{</span>
 <a id="__codelineno-0-121" name="__codelineno-0-121" href="#__codelineno-0-121"></a>        <span class="nv">$limites</span><span class="p">[]</span><span class="o">=</span><span class="nv">$ligne</span><span class="p">[</span><span class="s1">&#39;limites&#39;</span><span class="p">];</span>
 <a id="__codelineno-0-122" name="__codelineno-0-122" href="#__codelineno-0-122"></a>        <span class="nv">$coeffr</span><span class="p">[]</span><span class="o">=</span><span class="nv">$ligne</span><span class="p">[</span><span class="s1">&#39;coeffR&#39;</span><span class="p">];</span>
@@ -1327,7 +1327,7 @@
 <h2 id="48-el-controlador-de-la-aplicacion">4.8. <span style="color: #4f81bd">El controlador de la aplicación</span></h2>
 <p>El controlador <strong>main.php</strong> de la aplicación es el que se ha descrito en la primera parte de este capítulo. Se trata de un controlador genérico independiente de la aplicación.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="cp">&lt;?php</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>        <span class="c1">// controlador genérico</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>     <span class="c1">// controlador genérico</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>  <span class="c1">// lecture config</span>
 <a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>  <span class="k">include</span> <span class="s1">&#39;config.php&#39;</span><span class="p">;</span>
@@ -1346,13 +1346,13 @@
 <a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>  <span class="nv">$sAction</span><span class="o">=</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;action&#39;</span><span class="p">]</span> <span class="o">?</span> <span class="nb">strtolower</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;action&#39;</span><span class="p">])</span> <span class="o">:</span> <span class="s1">&#39;init&#39;</span><span class="p">;</span>
 <a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>  <span class="nv">$sAction</span><span class="o">=</span><span class="nb">strtolower</span><span class="p">(</span><span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">&#39;REQUEST_METHOD&#39;</span><span class="p">])</span><span class="o">.</span><span class="s2">&quot;:</span><span class="si">$sAction</span><span class="s2">&quot;</span><span class="p">;</span>
 <a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>
-<a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a>        <span class="c1">// ¿Es normal la secuencia de acciones?</span>
+<a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a>     <span class="c1">// ¿Es normal la secuencia de acciones?</span>
 <a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a>  <span class="k">if</span><span class="p">(</span> <span class="o">!</span> <span class="nx">enchainementOK</span><span class="p">(</span><span class="nv">$dConfig</span><span class="p">,</span><span class="nv">$dSession</span><span class="p">,</span><span class="nv">$sAction</span><span class="p">)){</span>  
 <a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a>    <span class="c1">// secuencia anómala</span>
 <a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a>    <span class="nv">$sAction</span><span class="o">=</span><span class="s1">&#39;enchainementinvalide&#39;</span><span class="p">;</span>
 <a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a>  <span class="p">}</span><span class="c1">//if</span>
 <a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a>
-<a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a>        <span class="c1">// procesamiento de la acción</span>
+<a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a>     <span class="c1">// procesamiento de la acción</span>
 <a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a>  <span class="nv">$scriptAction</span><span class="o">=</span><span class="nv">$dConfig</span><span class="p">[</span><span class="s1">&#39;actions&#39;</span><span class="p">][</span><span class="nv">$sAction</span><span class="p">]</span> <span class="o">?</span> 
 <a id="__codelineno-6-29" name="__codelineno-6-29" href="#__codelineno-6-29"></a>    <span class="nv">$dConfig</span><span class="p">[</span><span class="s1">&#39;actions&#39;</span><span class="p">][</span><span class="nv">$sAction</span><span class="p">][</span><span class="s1">&#39;url&#39;</span><span class="p">]</span> <span class="o">:</span> 
 <a id="__codelineno-6-30" name="__codelineno-6-30" href="#__codelineno-6-30"></a>    <span class="nv">$dConfig</span><span class="p">[</span><span class="s1">&#39;actions&#39;</span><span class="p">][</span><span class="s1">&#39;actionInvalide&#39;</span><span class="p">][</span><span class="s1">&#39;url&#39;</span><span class="p">];</span>
@@ -1377,7 +1377,7 @@
 <a id="__codelineno-6-49" name="__codelineno-6-49" href="#__codelineno-6-49"></a>  <span class="k">function</span> <span class="nf">finSession</span><span class="p">(</span><span class="o">&amp;</span><span class="nv">$dConfig</span><span class="p">,</span><span class="o">&amp;</span><span class="nv">$dReponse</span><span class="p">,</span><span class="o">&amp;</span><span class="nv">$dSession</span><span class="p">){</span>
 <a id="__codelineno-6-50" name="__codelineno-6-50" href="#__codelineno-6-50"></a>    <span class="c1">// $dConfig: diccionario de configuración</span>
 <a id="__codelineno-6-51" name="__codelineno-6-51" href="#__codelineno-6-51"></a>      <span class="c1">// $dSession: diccionario que contiene la información de la sesión</span>
-<a id="__codelineno-6-52" name="__codelineno-6-52" href="#__codelineno-6-52"></a>                <span class="c1">// $dReponse: el diccionario de argumentos de la página de respuesta</span>
+<a id="__codelineno-6-52" name="__codelineno-6-52" href="#__codelineno-6-52"></a>         <span class="c1">// $dReponse: el diccionario de argumentos de la página de respuesta</span>
 <a id="__codelineno-6-53" name="__codelineno-6-53" href="#__codelineno-6-53"></a>
 <a id="__codelineno-6-54" name="__codelineno-6-54" href="#__codelineno-6-54"></a>    <span class="c1">//: registro de la sesión</span>
 <a id="__codelineno-6-55" name="__codelineno-6-55" href="#__codelineno-6-55"></a>    <span class="k">if</span><span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$dSession</span><span class="p">)){</span>
@@ -1486,7 +1486,7 @@
 <h2 id="411-el-archivo-de-configuracion-de-la-aplicacion-web-configphp">4.11. <span style="color: #4f81bd">El archivo de configuración de la aplicación web config.php</span></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="cp">&lt;?php</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>        <span class="c1">// configuración de PHP</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>     <span class="c1">// configuración de PHP</span>
 <a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>  <span class="nb">ini_set</span><span class="p">(</span><span class="s2">&quot;register_globals&quot;</span><span class="p">,</span><span class="s2">&quot;off&quot;</span><span class="p">);</span>
 <a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>  <span class="nb">ini_set</span><span class="p">(</span><span class="s2">&quot;display_errors&quot;</span><span class="p">,</span><span class="s2">&quot;off&quot;</span><span class="p">);</span>  
 <a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>  <span class="nb">ini_set</span><span class="p">(</span><span class="s2">&quot;expose_php&quot;</span><span class="p">,</span><span class="s2">&quot;off&quot;</span><span class="p">);</span>
@@ -1538,7 +1538,7 @@
 <p><span id="refheading29994107341754" name="refheading29994107341754" class="odt-bookmark-anchor"></span></p>
 <h2 id="412-las-acciones-de-la-aplicacion-web">4.12. <span style="color: #4f81bd">Las acciones de la aplicación web</span></h2>
 <p><span id="refheading29996107341754" name="refheading29996107341754" class="odt-bookmark-anchor"></span></p>
-<h3 id="4121-funcionamiento-general-de-los-scripts-de-accion">4.12.1. <span style="color: #4f81bd"><strong>Funcionamiento general de los scripts de acción</strong></span></h3>
+<h3 id="4121-funcionamiento-general-de-los-scripts-de-accion">4.12.1. <span style="color: #4f81bd">Funcionamiento general de los scripts de acción</span></h3>
 <ul>
   <li>El controlador invoca un script de acción en función del parámetro <b>«action» </b>que ha recibido del cliente. 
   </li>
@@ -1551,13 +1551,13 @@
 </ul>
 
 <p><span id="refheading29998107341754" name="refheading29998107341754" class="odt-bookmark-anchor"></span></p>
-<h3 id="4122-la-accion-getinit">4.12.2. <span style="color: #4f81bd"><strong>La acción get:init</strong></span></h3>
+<h3 id="4122-la-accion-getinit">4.12.2. <span style="color: #4f81bd">La acción get:init</span></h3>
 <p>Es la acción que genera el formulario vacío. El archivo de configuración muestra que será procesada por el script <strong>a-init.php</strong>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>  $dConfig[&#39;actions&#39;][&#39;get:init&#39;]=array(&#39;url&#39;=&gt;&#39;a-init.php&#39;);
 </code></pre></div>
 <p>El código del script <strong>a-init.php</strong> es el siguiente:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="cp">&lt;?php</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>        <span class="c1">// se muestra el formulario de entrada</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>     <span class="c1">// se muestra el formulario de entrada</span>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>  <span class="nv">$dSession</span><span class="p">[</span><span class="s1">&#39;etat&#39;</span><span class="p">]</span><span class="o">=</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;principal&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;e-formulaire&#39;</span><span class="p">,</span> <span class="s1">&#39;secondaire&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;init&#39;</span><span class="p">);</span>
 <a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="cp">?&gt;</span><span class="x">  </span>
 </code></pre></div>
@@ -1570,13 +1570,13 @@
 </code></pre></div>
 <p>El script <strong>e-formulaire.php</strong> generará la vista [v-formulaire] en sus variantes [init] y c.a.d. El formulario está vacío.</p>
 <p><span id="refheading30000107341754" name="refheading30000107341754" class="odt-bookmark-anchor"></span></p>
-<h3 id="4123-la-accion-postcalculerimpot">4.12.3. <span style="color: #4f81bd"><strong>La acción post:calculerimpot</strong></span></h3>
+<h3 id="4123-la-accion-postcalculerimpot">4.12.3. <span style="color: #4f81bd">La acción post:calculerimpot</span></h3>
 <p>Es la acción que permite calcular el impuesto a partir de los datos introducidos en el formulario. El archivo de configuración indica que es el script <strong>a-calculimpot.php</strong> el que procesará esta acción:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>  $dConfig[&#39;actions&#39;][&#39;post:calculerimpot&#39;]=array(&#39;url&#39;=&gt;&#39;a-calculimpot.php&#39;);
 </code></pre></div>
 <p>El código del script <strong>a-calculimpot.php</strong> es el siguiente:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="cp">&lt;?php</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>        <span class="c1">// solicitud de cálculo de impuestos</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>     <span class="c1">// solicitud de cálculo de impuestos</span>
 <a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
 <a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>  <span class="c1">// primero se comprueba la validez de los parámetros</span>
 <a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>  <span class="nv">$sOptMarie</span><span class="o">=</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;optmarie&#39;</span><span class="p">];</span>
@@ -1639,7 +1639,7 @@
 <a id="__codelineno-14-62" name="__codelineno-14-62" href="#__codelineno-14-62"></a>    <span class="k">if</span><span class="p">(</span><span class="nb">count</span><span class="p">(</span><span class="nv">$oImpots</span><span class="o">-&gt;</span><span class="na">aErreurs</span><span class="p">)</span><span class="o">!=</span><span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="nv">$oImpots</span><span class="o">-&gt;</span><span class="na">aErreurs</span><span class="p">);</span>
 <a id="__codelineno-14-63" name="__codelineno-14-63" href="#__codelineno-14-63"></a>    <span class="c1">// recuperación de los datos de límites, coeffr, coeffn</span>
 <a id="__codelineno-14-64" name="__codelineno-14-64" href="#__codelineno-14-64"></a>        <span class="k">list</span><span class="p">(</span><span class="nv">$limites</span><span class="p">,</span><span class="nv">$coeffr</span><span class="p">,</span><span class="nv">$coeffn</span><span class="p">)</span><span class="o">=</span><span class="nv">$oImpots</span><span class="o">-&gt;</span><span class="na">getData</span><span class="p">();</span>
-<a id="__codelineno-14-65" name="__codelineno-14-65" href="#__codelineno-14-65"></a>                <span class="c1">// se desconecta</span>
+<a id="__codelineno-14-65" name="__codelineno-14-65" href="#__codelineno-14-65"></a>         <span class="c1">// se desconecta</span>
 <a id="__codelineno-14-66" name="__codelineno-14-66" href="#__codelineno-14-66"></a>        <span class="nv">$oImpots</span><span class="o">-&gt;</span><span class="na">disconnect</span><span class="p">();</span>
 <a id="__codelineno-14-67" name="__codelineno-14-67" href="#__codelineno-14-67"></a>    <span class="c1">// se devuelve el resultado</span>
 <a id="__codelineno-14-68" name="__codelineno-14-68" href="#__codelineno-14-68"></a>    <span class="k">if</span><span class="p">(</span><span class="nb">count</span><span class="p">(</span><span class="nv">$oImpots</span><span class="o">-&gt;</span><span class="na">aErreurs</span><span class="p">)</span><span class="o">!=</span><span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="nv">$oImpots</span><span class="o">-&gt;</span><span class="na">aErreurs</span><span class="p">);</span>
@@ -1675,7 +1675,7 @@
 </code></pre></div>
 <p>El script <strong>a-retourformulaire.php</strong> es el siguiente:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="cp">&lt;?php</span>
-<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>        <span class="c1">// se muestra el formulario de entrada</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>     <span class="c1">// se muestra el formulario de entrada</span>
 <a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>  <span class="nv">$dSession</span><span class="p">[</span><span class="s1">&#39;etat&#39;</span><span class="p">]</span><span class="o">=</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;principal&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;e-formulaire&#39;</span><span class="p">,</span><span class="s1">&#39;secondaire&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;retourformulaire&#39;</span><span class="p">);</span>
 <a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="cp">?&gt;</span><span class="x">    </span>
 </code></pre></div>
@@ -1706,7 +1706,7 @@
 </code></pre></div>
 <p>El código de este script es el siguiente:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="cp">&lt;?php</span> 
-<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>        <span class="c1">// secuencia de acciones no válida</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>     <span class="c1">// secuencia de acciones no válida</span>
 <a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>  <span class="nv">$dReponse</span><span class="p">[</span><span class="s1">&#39;erreurs&#39;</span><span class="p">]</span><span class="o">=</span><span class="k">array</span><span class="p">(</span><span class="s2">&quot;Enchaînement d&#39;actions invalide&quot;</span><span class="p">);</span>
 <a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>  <span class="nv">$dSession</span><span class="p">[</span><span class="s1">&#39;etat&#39;</span><span class="p">]</span><span class="o">=</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;principal&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;e-erreurs&#39;</span><span class="p">,</span><span class="s1">&#39;secondaire&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;enchainementinvalide&#39;</span><span class="p">);</span>  
 <a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="cp">?&gt;</span>
@@ -1723,7 +1723,7 @@
 <p><span id="refheading30008107341754" name="refheading30008107341754" class="odt-bookmark-anchor"></span></p>
 <h2 id="414-las-vistas-de-la-aplicacion">4.14. <span style="color: #4f81bd">Las vistas de la aplicación</span></h2>
 <p><span id="refheading30010107341754" name="refheading30010107341754" class="odt-bookmark-anchor"></span></p>
-<h3 id="4141-visualizacion-de-la-vista-final">4.14.1. <span style="color: #4f81bd"><strong>Visualización de la vista final</strong></span></h3>
+<h3 id="4141-visualizacion-de-la-vista-final">4.14.1. <span style="color: #4f81bd">Visualización de la vista final</span></h3>
 <p>Veamos cómo el controlador envía la respuesta al cliente, una vez ejecutada la acción solicitada  por este:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="cp">&lt;?php</span>
 <a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="nx">…</span>
@@ -1737,13 +1737,13 @@
 <a id="__codelineno-24-10" name="__codelineno-24-10" href="#__codelineno-24-10"></a>  <span class="nv">$sAction</span><span class="o">=</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;action&#39;</span><span class="p">]</span> <span class="o">?</span> <span class="nb">strtolower</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;action&#39;</span><span class="p">])</span> <span class="o">:</span> <span class="s1">&#39;init&#39;</span><span class="p">;</span>
 <a id="__codelineno-24-11" name="__codelineno-24-11" href="#__codelineno-24-11"></a>  <span class="nv">$sAction</span><span class="o">=</span><span class="nb">strtolower</span><span class="p">(</span><span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">&#39;REQUEST_METHOD&#39;</span><span class="p">])</span><span class="o">.</span><span class="s2">&quot;:</span><span class="si">$sAction</span><span class="s2">&quot;</span><span class="p">;</span>
 <a id="__codelineno-24-12" name="__codelineno-24-12" href="#__codelineno-24-12"></a>
-<a id="__codelineno-24-13" name="__codelineno-24-13" href="#__codelineno-24-13"></a>        <span class="c1">// ¿Es normal la secuencia de acciones?</span>
+<a id="__codelineno-24-13" name="__codelineno-24-13" href="#__codelineno-24-13"></a>     <span class="c1">// ¿Es normal la secuencia de acciones?</span>
 <a id="__codelineno-24-14" name="__codelineno-24-14" href="#__codelineno-24-14"></a>  <span class="k">if</span><span class="p">(</span> <span class="o">!</span> <span class="nx">enchainementOK</span><span class="p">(</span><span class="nv">$dConfig</span><span class="p">,</span><span class="nv">$dSession</span><span class="p">,</span><span class="nv">$sAction</span><span class="p">)){</span>  
 <a id="__codelineno-24-15" name="__codelineno-24-15" href="#__codelineno-24-15"></a>    <span class="c1">// secuencia anómala</span>
 <a id="__codelineno-24-16" name="__codelineno-24-16" href="#__codelineno-24-16"></a>    <span class="nv">$sAction</span><span class="o">=</span><span class="s1">&#39;enchainementinvalide&#39;</span><span class="p">;</span>
 <a id="__codelineno-24-17" name="__codelineno-24-17" href="#__codelineno-24-17"></a>  <span class="p">}</span><span class="c1">//if</span>
 <a id="__codelineno-24-18" name="__codelineno-24-18" href="#__codelineno-24-18"></a>
-<a id="__codelineno-24-19" name="__codelineno-24-19" href="#__codelineno-24-19"></a>        <span class="c1">// procesamiento de la acción</span>
+<a id="__codelineno-24-19" name="__codelineno-24-19" href="#__codelineno-24-19"></a>     <span class="c1">// procesamiento de la acción</span>
 <a id="__codelineno-24-20" name="__codelineno-24-20" href="#__codelineno-24-20"></a>  <span class="nv">$scriptAction</span><span class="o">=</span><span class="nv">$dConfig</span><span class="p">[</span><span class="s1">&#39;actions&#39;</span><span class="p">][</span><span class="nv">$sAction</span><span class="p">]</span> <span class="o">?</span> 
 <a id="__codelineno-24-21" name="__codelineno-24-21" href="#__codelineno-24-21"></a>    <span class="nv">$dConfig</span><span class="p">[</span><span class="s1">&#39;actions&#39;</span><span class="p">][</span><span class="nv">$sAction</span><span class="p">][</span><span class="s1">&#39;url&#39;</span><span class="p">]</span> <span class="o">:</span> 
 <a id="__codelineno-24-22" name="__codelineno-24-22" href="#__codelineno-24-22"></a>    <span class="nv">$dConfig</span><span class="p">[</span><span class="s1">&#39;actions&#39;</span><span class="p">][</span><span class="s1">&#39;actionInvalide&#39;</span><span class="p">][</span><span class="s1">&#39;url&#39;</span><span class="p">];</span>
@@ -1760,12 +1760,12 @@
 <a id="__codelineno-24-33" name="__codelineno-24-33" href="#__codelineno-24-33"></a>  <span class="k">function</span> <span class="nf">finSession</span><span class="p">(</span><span class="o">&amp;</span><span class="nv">$dConfig</span><span class="p">,</span><span class="o">&amp;</span><span class="nv">$dReponse</span><span class="p">,</span><span class="o">&amp;</span><span class="nv">$dSession</span><span class="p">){</span>
 <a id="__codelineno-24-34" name="__codelineno-24-34" href="#__codelineno-24-34"></a>    <span class="c1">// $dConfig: diccionario de configuración</span>
 <a id="__codelineno-24-35" name="__codelineno-24-35" href="#__codelineno-24-35"></a>      <span class="c1">// $dSession: diccionario que contiene la información de la sesión</span>
-<a id="__codelineno-24-36" name="__codelineno-24-36" href="#__codelineno-24-36"></a>                <span class="c1">// $dReponse: el diccionario de argumentos de la página de respuesta</span>
+<a id="__codelineno-24-36" name="__codelineno-24-36" href="#__codelineno-24-36"></a>         <span class="c1">// $dReponse: el diccionario de argumentos de la página de respuesta</span>
 <a id="__codelineno-24-37" name="__codelineno-24-37" href="#__codelineno-24-37"></a>
 <a id="__codelineno-24-38" name="__codelineno-24-38" href="#__codelineno-24-38"></a>    <span class="c1">// registro de la sesión</span>
 <a id="__codelineno-24-39" name="__codelineno-24-39" href="#__codelineno-24-39"></a><span class="o">...</span>
 <a id="__codelineno-24-40" name="__codelineno-24-40" href="#__codelineno-24-40"></a>
-<a id="__codelineno-24-41" name="__codelineno-24-41" href="#__codelineno-24-41"></a>                <span class="c1">// envío de la respuesta al cliente</span>
+<a id="__codelineno-24-41" name="__codelineno-24-41" href="#__codelineno-24-41"></a>         <span class="c1">// envío de la respuesta al cliente</span>
 <a id="__codelineno-24-42" name="__codelineno-24-42" href="#__codelineno-24-42"></a>        <span class="k">include</span> <span class="nv">$dConfig</span><span class="p">[</span><span class="s1">&#39;vuesReponse&#39;</span><span class="p">][</span><span class="nv">$dReponse</span><span class="p">[</span><span class="s1">&#39;vuereponse&#39;</span><span class="p">]][</span><span class="s1">&#39;url&#39;</span><span class="p">];</span>
 <a id="__codelineno-24-43" name="__codelineno-24-43" href="#__codelineno-24-43"></a>
 <a id="__codelineno-24-44" name="__codelineno-24-44" href="#__codelineno-24-44"></a>    <span class="c1">// fin del script</span>
@@ -1795,12 +1795,12 @@
 <a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a>  <span class="k">function</span> <span class="nf">finSession</span><span class="p">(</span><span class="o">&amp;</span><span class="nv">$dConfig</span><span class="p">,</span><span class="o">&amp;</span><span class="nv">$dReponse</span><span class="p">,</span><span class="o">&amp;</span><span class="nv">$dSession</span><span class="p">){</span>
 <a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a>    <span class="c1">// $dConfig: diccionario de configuración</span>
 <a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a>      <span class="c1">// $dSession: diccionario que contiene la información de la sesión</span>
-<a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a>                <span class="c1">// $dReponse: el diccionario de argumentos de la página de respuesta</span>
+<a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a>         <span class="c1">// $dReponse: el diccionario de argumentos de la página de respuesta</span>
 <a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a>
 <a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a>    <span class="c1">// registro de la sesión</span>
 <a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a><span class="o">...</span>
 <a id="__codelineno-25-11" name="__codelineno-25-11" href="#__codelineno-25-11"></a>
-<a id="__codelineno-25-12" name="__codelineno-25-12" href="#__codelineno-25-12"></a>                <span class="c1">//: envío de la respuesta al cliente</span>
+<a id="__codelineno-25-12" name="__codelineno-25-12" href="#__codelineno-25-12"></a>         <span class="c1">//: envío de la respuesta al cliente</span>
 <a id="__codelineno-25-13" name="__codelineno-25-13" href="#__codelineno-25-13"></a>        <span class="k">include</span> <span class="nv">$dConfig</span><span class="p">[</span><span class="s1">&#39;vuesReponse&#39;</span><span class="p">][</span><span class="nv">$dReponse</span><span class="p">[</span><span class="s1">&#39;vuereponse&#39;</span><span class="p">]][</span><span class="s1">&#39;url&#39;</span><span class="p">];</span>
 <a id="__codelineno-25-14" name="__codelineno-25-14" href="#__codelineno-25-14"></a>
 <a id="__codelineno-25-15" name="__codelineno-25-15" href="#__codelineno-25-15"></a>    <span class="c1">// fin del script</span>
@@ -1809,7 +1809,7 @@
 </code></pre></div>
 <p>La vista enviada al usuario viene definida por la entidad <strong>$dReponse[&#x27;vuereponse&#x27;],</strong> que define la plantilla que se utilizará para la respuesta final.</p>
 <p><span id="refheading30012107341754" name="refheading30012107341754" class="odt-bookmark-anchor"></span></p>
-<h3 id="4142-plantilla-de-la-respuesta">4.14.2. <span style="color: #4f81bd"><strong>Plantilla de la respuesta</strong></span></h3>
+<h3 id="4142-plantilla-de-la-respuesta">4.14.2. <span style="color: #4f81bd">Plantilla de la respuesta</span></h3>
 <p>La aplicación generará sus diferentes respuestas según el siguiente modelo único:</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><img src="images/10000000000002A9000000C9E1AAB985.png" width="341" height="101" style="display:inline-block; margin:4px;width:9.01cm;height:2.66cm;" class="odt-zoomable" data-zoom-src="images/10000000000002A9000000C9E1AAB985.png" /></td></tr></table>
 
@@ -1845,7 +1845,7 @@
 
 <p>Un generador de vistas que desee utilizar el modelo <strong>modèle1</strong> deberá definir estos tres elementos dinámicos. A continuación, definimos las vistas elementales que pueden sustituir a los elementos [vue1] y [vue2] del modelo.</p>
 <p><span id="refheading30014107341754" name="refheading30014107341754" class="odt-bookmark-anchor"></span></p>
-<h3 id="4143-la-vista-elemental-v-bandeauphp">4.14.3. <span style="color: #4f81bd"><strong>La vista elemental v-bandeau.php</strong></span></h3>
+<h3 id="4143-la-vista-elemental-v-bandeauphp">4.14.3. <span style="color: #4f81bd">La vista elemental v-bandeau.php</span></h3>
 <p>El script <strong>v-bandeau.php</strong> genera una vista que se colocará en la zona [vue1]:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="p">&lt;</span><span class="nt">table</span><span class="p">&gt;</span>
 <a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>    <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
@@ -1872,7 +1872,7 @@
 </ul>
 
 <p><span id="refheading30016107341754" name="refheading30016107341754" class="odt-bookmark-anchor"></span></p>
-<h3 id="4144-la-vista-elemental-v-formulairephp">4.14.4. <span style="color: #4f81bd"><strong>La vista elemental v-formulaire.php</strong></span></h3>
+<h3 id="4144-la-vista-elemental-v-formulairephp">4.14.4. <span style="color: #4f81bd">La vista elemental v-formulaire.php</span></h3>
 <p>La parte [vue2] corresponde a la vista <strong>[v-formulaire]</strong> o a la vista <strong>[v-erreurs]</strong>. La vista <strong>[v-formulaire]</strong> se genera mediante el script <strong>v-formulaire.php</strong>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;main.php?action=calculerimpot&quot;</span><span class="p">&gt;</span>
 <a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>    <span class="p">&lt;</span><span class="nt">table</span><span class="p">&gt;</span>
@@ -1915,7 +1915,7 @@
 </ul>
 
 <p><span id="refheading30018107341754" name="refheading30018107341754" class="odt-bookmark-anchor"></span></p>
-<h3 id="4145-la-vista-elemental-v-erreursphp">4.14.5. <span style="color: #4f81bd"><strong>La vista elemental v-erreurs.php</strong></span></h3>
+<h3 id="4145-la-vista-elemental-v-erreursphp">4.14.5. <span style="color: #4f81bd">La vista elemental v-erreurs.php</span></h3>
 <p>La vista <strong>[v-erreurs]</strong> es generada por el script <strong>v-erreurs.php</strong>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>Les erreurs suivantes se sont produites :
 <a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
@@ -1942,7 +1942,7 @@
 </ul>
 
 <p><span id="refheading30020107341754" name="refheading30020107341754" class="odt-bookmark-anchor"></span></p>
-<h3 id="4146-la-hoja-de-estilo">4.14.6. <span style="color: #4f81bd"><strong>La hoja de estilo</strong></span></h3>
+<h3 id="4146-la-hoja-de-estilo">4.14.6. <span style="color: #4f81bd">La hoja de estilo</span></h3>
 <p>Todas las vistas están «vestidas» con una hoja de estilo. Para modificar el aspecto visual de la aplicación, se modificará su hoja de estilo. La siguiente hoja de estilo <strong>style1.css</strong>: </p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>div.menu {
 <a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>    background-color: #FFD700;
@@ -2052,11 +2052,11 @@
 <p><span id="refheading30022107341754" name="refheading30022107341754" class="odt-bookmark-anchor"></span></p>
 <h2 id="415-los-generadores-de-vistas">4.15. <span style="color: #4f81bd">Los generadores de vistas</span></h2>
 <p><span id="refheading30024107341754" name="refheading30024107341754" class="odt-bookmark-anchor"></span></p>
-<h3 id="4151-funcion-de-un-generador-de-vistas">4.15.1. <span style="color: #4f81bd"><strong>Función de un generador de vistas</strong></span></h3>
+<h3 id="4151-funcion-de-un-generador-de-vistas">4.15.1. <span style="color: #4f81bd">Función de un generador de vistas</span></h3>
 <p>Recordemos la secuencia de código del controlador que ejecuta un generador de vistas:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="cp">&lt;?php</span>
 <a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="nx">…</span>
-<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a>        <span class="c1">//: procesamiento de la acción</span>
+<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a>     <span class="c1">//: procesamiento de la acción</span>
 <a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a>  <span class="nv">$scriptAction</span><span class="o">=</span><span class="nv">$dConfig</span><span class="p">[</span><span class="s1">&#39;actions&#39;</span><span class="p">][</span><span class="nv">$sAction</span><span class="p">]</span> <span class="o">?</span> 
 <a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a>    <span class="nv">$dConfig</span><span class="p">[</span><span class="s1">&#39;actions&#39;</span><span class="p">][</span><span class="nv">$sAction</span><span class="p">][</span><span class="s1">&#39;url&#39;</span><span class="p">]</span> <span class="o">:</span> 
 <a id="__codelineno-32-6" name="__codelineno-32-6" href="#__codelineno-32-6"></a>    <span class="nv">$dConfig</span><span class="p">[</span><span class="s1">&#39;actions&#39;</span><span class="p">][</span><span class="s1">&#39;actionInvalide&#39;</span><span class="p">][</span><span class="s1">&#39;url&#39;</span><span class="p">];</span>
@@ -2096,7 +2096,7 @@
 </ul>
 
 <p><span id="refheading30026107341754" name="refheading30026107341754" class="odt-bookmark-anchor"></span></p>
-<h3 id="4152-el-generador-de-vistas-asociado-al-informe-e-formulaire">4.15.2. <span style="color: #4f81bd"><strong>El generador de vistas asociado al informe [e-formulaire]</strong></span></h3>
+<h3 id="4152-el-generador-de-vistas-asociado-al-informe-e-formulaire">4.15.2. <span style="color: #4f81bd">El generador de vistas asociado al informe [e-formulaire]</span></h3>
 <p>El script encargado de generar la vista asociada al estado <strong>[e-formulaire]</strong> se llama <strong>e-formulaire.php</strong>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="cp">&lt;?php</span>
 <a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a><span class="nx">…</span>
@@ -2162,7 +2162,7 @@
 
 <p>En el ejemplo anterior, el script <strong>e-formulaire.php</strong> utiliza esta información para presentar la respuesta según estas tres variantes.</p>
 <p><span id="refheading30028107341754" name="refheading30028107341754" class="odt-bookmark-anchor"></span></p>
-<h3 id="4153-la-vista-asociada-al-informe-e-erreurs">4.15.3. <span style="color: #4f81bd"><strong>La vista asociada al informe [e-erreurs]</strong></span></h3>
+<h3 id="4153-la-vista-asociada-al-informe-e-erreurs">4.15.3. <span style="color: #4f81bd">La vista asociada al informe [e-erreurs]</span></h3>
 <p>El script encargado de generar la vista asociada al informe <strong>[e-erreurs]</strong> se llama <strong>e-erreurs.php</strong> y es el siguiente:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="cp">&lt;?php</span>
 <a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>
@@ -2187,18 +2187,18 @@
 <a id="__codelineno-36-21" name="__codelineno-36-21" href="#__codelineno-36-21"></a><span class="cp">?&gt;</span>
 </code></pre></div>
 <p><span id="refheading30030107341754" name="refheading30030107341754" class="odt-bookmark-anchor"></span></p>
-<h3 id="4154-visualizacion-de-la-vista-final">4.15.4. <span style="color: #4f81bd"><strong>Visualización de la vista final</strong></span></h3>
+<h3 id="4154-visualizacion-de-la-vista-final">4.15.4. <span style="color: #4f81bd">Visualización de la vista final</span></h3>
 <p>Los dos scripts que generan las dos vistas finales terminan ambos con la llamada a la función <strong>finSession</strong> del controlador:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="cp">&lt;?php</span>
 <a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="nx">…</span>
 <a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a>  <span class="k">function</span> <span class="nf">finSession</span><span class="p">(</span><span class="o">&amp;</span><span class="nv">$dConfig</span><span class="p">,</span><span class="o">&amp;</span><span class="nv">$dReponse</span><span class="p">,</span><span class="o">&amp;</span><span class="nv">$dSession</span><span class="p">){</span>
 <a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a>    <span class="c1">// $dConfig: diccionario de configuración</span>
 <a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a>      <span class="c1">// $dSession: diccionario que contiene la información de la sesión</span>
-<a id="__codelineno-37-6" name="__codelineno-37-6" href="#__codelineno-37-6"></a>                <span class="c1">// $dReponse: el diccionario de argumentos de la página de respuesta</span>
+<a id="__codelineno-37-6" name="__codelineno-37-6" href="#__codelineno-37-6"></a>         <span class="c1">// $dReponse: el diccionario de argumentos de la página de respuesta</span>
 <a id="__codelineno-37-7" name="__codelineno-37-7" href="#__codelineno-37-7"></a>
 <a id="__codelineno-37-8" name="__codelineno-37-8" href="#__codelineno-37-8"></a><span class="o">....</span>
 <a id="__codelineno-37-9" name="__codelineno-37-9" href="#__codelineno-37-9"></a>
-<a id="__codelineno-37-10" name="__codelineno-37-10" href="#__codelineno-37-10"></a>                <span class="c1">// se muestra la respuesta</span>
+<a id="__codelineno-37-10" name="__codelineno-37-10" href="#__codelineno-37-10"></a>         <span class="c1">// se muestra la respuesta</span>
 <a id="__codelineno-37-11" name="__codelineno-37-11" href="#__codelineno-37-11"></a>        <span class="k">include</span> <span class="nv">$dConfig</span><span class="p">[</span><span class="s1">&#39;vuesReponse&#39;</span><span class="p">][</span><span class="nv">$dReponse</span><span class="p">[</span><span class="s1">&#39;vuereponse&#39;</span><span class="p">]][</span><span class="s1">&#39;url&#39;</span><span class="p">];</span>
 <a id="__codelineno-37-12" name="__codelineno-37-12" href="#__codelineno-37-12"></a>
 <a id="__codelineno-37-13" name="__codelineno-37-13" href="#__codelineno-37-13"></a>    <span class="c1">//: fin del script</span>
@@ -2215,7 +2215,7 @@
 <h2 id="416-modificar-la-plantilla-de-respuesta">4.16. <span style="color: #4f81bd">Modificar la plantilla de respuesta</span></h2>
 <p>Suponemos aquí que se decide cambiar el aspecto visual de la respuesta enviada al cliente y nos interesa comprender las repercusiones que esto tiene a nivel del código.</p>
 <p><span id="refheading30034107341754" name="refheading30034107341754" class="odt-bookmark-anchor"></span></p>
-<h3 id="4161-la-nueva-plantilla">4.16.1. <span style="color: #4f81bd"><strong>La nueva plantilla</strong></span></h3>
+<h3 id="4161-la-nueva-plantilla">4.16.1. <span style="color: #4f81bd">La nueva plantilla</span></h3>
 <p>La estructura de la respuesta será ahora la siguiente:</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><img src="images/100000000000041C000000EDB2BECC55.png" width="526" height="119" style="display:inline-block; margin:4px;width:13.917cm;height:3.136cm;" class="odt-zoomable" data-zoom-src="images/100000000000041C000000EDB2BECC55.png" /></td></tr></table>
 
@@ -2261,7 +2261,7 @@
 
 <p>Estos elementos deberán ser fijados por los generadores de vistas.</p>
 <p><span id="refheading30036107341754" name="refheading30036107341754" class="odt-bookmark-anchor"></span></p>
-<h3 id="4162-las-diferentes-paginas-de-respuesta">4.16.2. <span style="color: #4f81bd"><strong>Las diferentes páginas de respuesta</strong></span></h3>
+<h3 id="4162-las-diferentes-paginas-de-respuesta">4.16.2. <span style="color: #4f81bd">Las diferentes páginas de respuesta</span></h3>
 <p>La aplicación mostrará ahora las siguientes respuestas al usuario. En la llamada inicial, la página de respuesta será la siguiente:</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><img src="images/10000000000004BA0000030D523DC12C.png" width="605" height="391" style="display:inline-block; margin:4px;width:16.007cm;height:10.333cm;" class="odt-zoomable" data-zoom-src="images/10000000000004BA0000030D523DC12C.png" /></td></tr></table>
 
@@ -2279,7 +2279,7 @@
 
 <p>Cabe señalar que la aplicación utiliza las mismas acciones que antes. Solo ha cambiado el aspecto de las respuestas.</p>
 <p><span id="refheading30038107341754" name="refheading30038107341754" class="odt-bookmark-anchor"></span></p>
-<h3 id="4163-las-vistas-elementales">4.16.3. <span style="color: #4f81bd"><strong>Las vistas elementales</strong></span></h3>
+<h3 id="4163-las-vistas-elementales">4.16.3. <span style="color: #4f81bd">Las vistas elementales</span></h3>
 <p>La vista elemental [vue1] se asociará, al igual que en el ejemplo anterior, al script <strong>v-bandeau.php</strong>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="p">&lt;</span><span class="nt">table</span><span class="p">&gt;</span>
 <a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a>    <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
@@ -2394,11 +2394,11 @@
 <h3 id="4164-la-hoja-de-estilo">4.16.4. <span style="color: #4f81bd"><strong>La hoja de estilo</strong></span></h3>
 <p>No ha cambiado. Sigue siendo <strong>style1.css</strong>.</p>
 <p><span id="refheading30042107341754" name="refheading30042107341754" class="odt-bookmark-anchor"></span></p>
-<h3 id="4165-el-nuevo-archivo-de-configuracion">4.16.5. <span style="color: #4f81bd"><strong>El nuevo archivo de configuración</strong></span></h3>
+<h3 id="4165-el-nuevo-archivo-de-configuracion">4.16.5. <span style="color: #4f81bd">El nuevo archivo de configuración</span></h3>
 <p>Para introducir estas nuevas vistas, tenemos que modificar algunas líneas del archivo de configuración.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="cp">&lt;?php</span>
 <a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a>
-<a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a>        <span class="c1">// configuración de PHP</span>
+<a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a>     <span class="c1">// configuración de PHP</span>
 <a id="__codelineno-46-4" name="__codelineno-46-4" href="#__codelineno-46-4"></a>  <span class="nb">ini_set</span><span class="p">(</span><span class="s2">&quot;register_globals&quot;</span><span class="p">,</span><span class="s2">&quot;off&quot;</span><span class="p">);</span>
 <a id="__codelineno-46-5" name="__codelineno-46-5" href="#__codelineno-46-5"></a>  <span class="nb">ini_set</span><span class="p">(</span><span class="s2">&quot;display_errors&quot;</span><span class="p">,</span><span class="s2">&quot;off&quot;</span><span class="p">);</span>  
 <a id="__codelineno-46-6" name="__codelineno-46-6" href="#__codelineno-46-6"></a>  <span class="nb">ini_set</span><span class="p">(</span><span class="s2">&quot;expose_php&quot;</span><span class="p">,</span><span class="s2">&quot;off&quot;</span><span class="p">);</span>
@@ -2449,7 +2449,7 @@
 </code></pre></div>
 <p>La modificación esencial consiste en cambiar los generadores de vista asociados a los informes [e-formulaire] y [e-erreurs]. Una vez hecho esto, los nuevos generadores de vista se encargan de generar las nuevas páginas de respuesta.</p>
 <p><span id="refheading30044107341754" name="refheading30044107341754" class="odt-bookmark-anchor"></span></p>
-<h3 id="4166-el-generador-de-vistas-asociado-al-informe-e-formulaire">4.16.6. <span style="color: #4f81bd"><strong>El generador de vistas asociado al informe [e-formulaire]</strong></span></h3>
+<h3 id="4166-el-generador-de-vistas-asociado-al-informe-e-formulaire">4.16.6. <span style="color: #4f81bd">El generador de vistas asociado al informe [e-formulaire]</span></h3>
 <p>En el archivo de configuración, el informe <strong>[e-formulaire]</strong> está ahora asociado al generador de vistas <strong>e-formulaire2.php</strong>. El código de este script es el siguiente:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a><span class="cp">&lt;?php</span>
 <a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a>  <span class="c1">// se prepara la respuesta del formulario</span>
@@ -2500,7 +2500,7 @@
 </ul>
 
 <p><span id="refheading30046107341754" name="refheading30046107341754" class="odt-bookmark-anchor"></span></p>
-<h3 id="4167-el-generador-de-vista-asociado-al-informe-e-erreurs">4.16.7. <span style="color: #4f81bd"><strong>El generador de vista asociado al informe [e-erreurs]</strong></span></h3>
+<h3 id="4167-el-generador-de-vista-asociado-al-informe-e-erreurs">4.16.7. <span style="color: #4f81bd">El generador de vista asociado al informe [e-erreurs]</span></h3>
 <p>En el archivo de configuración, el informe <strong>[e-erreurs]</strong> está ahora asociado al generador de vista <strong>e-erreurs2.php</strong>. El código de este script es el siguiente:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="cp">&lt;?php</span>
 <a id="__codelineno-48-2" name="__codelineno-48-2" href="#__codelineno-48-2"></a>

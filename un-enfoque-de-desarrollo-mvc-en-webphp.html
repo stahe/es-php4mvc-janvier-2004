@@ -437,13 +437,18 @@
 <h1 id="2-un-enfoque-de-desarrollo-mvc-en-webphp">2. <span style="color: #365f91">Un enfoque de desarrollo MVC en web/PHP</span></h1>
 <p>Proponemos aquí un enfoque para el desarrollo de aplicaciones web/PHP que respeten la arquitectura MVC. Su único objetivo es abrir nuevas vías. El lector lo adaptará a sus gustos y necesidades.</p>
 <ol>
-<li>Comenzaremos por definir todas las vistas de la aplicación. Estas son las páginas web que se muestran al usuario. Nos pondremos en su lugar para diseñar las vistas. Se distinguen tres tipos de vistas:<ul>
-<li>el <strong>formulario de entrada</strong>, cuyo objetivo es obtener información del usuario. Este suele disponer de un botón para enviar al servidor la información introducida.</li>
-<li>La <strong>página de respuesta</strong>, que solo sirve para proporcionar información al usuario. A menudo cuenta con uno o varios enlaces que permiten al usuario continuar con la aplicación en otra página.</li>
-<li>la <strong>página mixta</strong>: el controlador ha enviado al cliente una página que contiene información que él mismo ha generado. Esta misma página servirá al cliente para proporcionar al controlador nueva información procedente del usuario.</li>
-</ul>
-</li>
+  <li>Comenzaremos por definir todas las vistas de la aplicación. Estas son las páginas web que se muestran al usuario. Nos pondremos en su lugar para diseñar las vistas. Se distinguen tres tipos de vistas:
+    <ul>
+      <li>el <b>formulario de entrada</b>, cuyo objetivo es obtener información del usuario. Este suele disponer de un botón para enviar al servidor la información introducida.
+      </li>
+      <li>La <b>página de respuesta</b>, que solo sirve para proporcionar información al usuario. A menudo cuenta con uno o varios enlaces que permiten al usuario continuar con la aplicación en otra página.
+      </li>
+      <li>la <b>página mixta</b>: el controlador ha enviado al cliente una página que contiene información que él mismo ha generado. Esta misma página servirá al cliente para proporcionar al controlador nueva información procedente del usuario.
+      </li>
+    </ul>
+  </li>
 </ol>
+
 <ol start="2">
   <li>Cada vista dará lugar a una página PHP. Para cada una de ellas:
     <ul>
@@ -556,13 +561,13 @@
 </ol>
 
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="cp">&lt;?php</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>        <span class="c1">// posiblemente algunas inicializaciones, especialmente en la fase de depuración</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>     <span class="c1">// posiblemente algunas inicializaciones, especialmente en la fase de depuración</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="o">...</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="cp">?&gt;</span>
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="x">&lt;balise&gt;</span>
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="x">...</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="x">                // aquí se intentará minimizar el código PHP</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="x">         // aquí se intentará minimizar el código PHP</span>
 <a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="x">&lt;/balise&gt;</span>
 </code></pre></div>
 <p>Cabe señalar que una vista elemental se integra en un modelo. Su código HTML se integra dentro del código de este último. En la mayoría de los casos, este último ya incluye las etiquetas &lt;html&gt;, &lt;head&gt; y &lt;body&gt;. Por lo tanto, es poco frecuente encontrar estas etiquetas en una vista elemental.</p>
